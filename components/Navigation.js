@@ -25,7 +25,7 @@ export default function Navigation() {
         <Link href="/" className={`font-playfair text-2xl font-bold ${
           isScrolled ? 'text-primary' : 'text-white'
         }`}>
-          Elite Golf Pro
+          Palm Beach Golf Pro
         </Link>
         
         {/* Mobile Menu Button */}

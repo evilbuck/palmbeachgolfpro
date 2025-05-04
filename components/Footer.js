@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-playfair text-2xl font-bold mb-4">Elite Golf Pro</h3>
+            <h3 className="font-playfair text-2xl font-bold mb-4">Palm Beach Golf Pro</h3>
             <p className="text-gray-400 mb-6">
               Professional golf instruction tailored to your needs. Transform your game with our expert coaching.
             </p>
@@ -97,16 +97,16 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-1 flex-shrink-0 text-accent" />
                 <span className="text-gray-400">
-                  123 Fairway Drive, Augusta, GA 30901
+                  Palm Beach Gardens, FL
                 </span>
               </li>
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
                 <Phone size={18} className="mr-2 flex-shrink-0 text-accent" />
                 <span className="text-gray-400">(555) 123-4567</span>
-              </li>
+              </li> */}
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 flex-shrink-0 text-accent" />
-                <span className="text-gray-400">info@elitegolfpro.com</span>
+                <span className="text-gray-400">info@palmbeachgolfpro.com</span>
               </li>
             </ul>
           </div>
