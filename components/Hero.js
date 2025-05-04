@@ -7,8 +7,7 @@ export default function Hero() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) {
       setError('Email is required');
@@ -18,12 +17,40 @@ export default function Hero() {
       setError('Please enter a valid email address');
       return;
     }
-    
-    // Here you would typically send the email to your backend or service
-    console.log('Email submitted:', email);
-    setIsSubmitted(true);
-    setError('');
+  
+    try {
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setIsSubmitted(true);
+        setError('');
+      } else {
+        setError(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      setError('Failed to subscribe. Please try again.');
+    }
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!email) {
+  //     setError('Email is required');
+  //     return;
+  //   }
+  //   if (!/\S+@\S+\.\S+/.test(email)) {
+  //     setError('Please enter a valid email address');
+  //     return;
+  //   }
+    
+  //   // Here you would typically send the email to your backend or service
+  //   console.log('Email submitted:', email);
+  //   setIsSubmitted(true);
+  //   setError('');
+  // };
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center">

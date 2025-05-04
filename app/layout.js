@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: 'Elite Golf Pro | Professional Golf Instruction',
+  title: 'Palm Beach Golf Pro | Professional Golf Instruction',
   description: 'Transform your golf game with personalized coaching from certified PGA professionals.',
 };
 

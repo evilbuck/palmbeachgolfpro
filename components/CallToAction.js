@@ -9,24 +9,54 @@ export default function CallToAction() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!name.trim()) newErrors.name = 'Name is required';
-    if (!email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Please enter a valid email';
+  // const validateForm = () => {
+  //   const newErrors = {};
+  //   if (!name.trim()) newErrors.name = 'Name is required';
+  //   if (!email.trim()) newErrors.email = 'Email is required';
+  //   else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Please enter a valid email';
     
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Here you would send the data to your backend
-      console.log('Form submitted:', { name, email });
-      setIsSubmitted(true);
+    // if (!name.trim()) newErrors.name = 'Name is required';
+    if (!email) {
+      setError('Email is required');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+  
+    try {
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setIsSubmitted(true);
+        setError('');
+      } else {
+        setError(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      setError('Failed to subscribe. Please try again.');
     }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     // Here you would send the data to your backend
+  //     console.log('Form submitted:', { name, email });
+  //     setIsSubmitted(true);
+  //   }
+  // };
 
   return (
     <section id="contact" className="section-spacing relative">
