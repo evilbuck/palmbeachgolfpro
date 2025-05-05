@@ -1,12 +1,13 @@
-const SibApiV3Sdk = require('@getbrevo/brevo');
-const validator = require('validator');
+import SibApiV3Sdk from '@getbrevo/brevo';
+// const SibApiV3Sdk = require('@getbrevo/brevo');
+import validator from 'validator';
 
 // Initialize Brevo API client
 const apiInstance = new SibApiV3Sdk.ContactsApi();
 const apiKey = apiInstance.authentications['api-key'];
 apiKey.apiKey = process.env.BREVO_API_KEY;
 
-exports.handler = async (event, context) => {
+export default async function subscribe(event, context) {
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
